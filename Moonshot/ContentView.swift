@@ -13,8 +13,20 @@ struct Astronaut: Codable, Identifiable {
     let description: String
 }
 
+struct Mission: Codable, Identifiable {
+    struct CrewRole: Codable {
+        let name: String
+        let role: String
+    }
+
+    let id: Int
+    let launchDate: String?
+    let crew: [CrewRole]
+    let description: String
+}
+
 extension Bundle {
-    func decode(_ file: String) -> [String: Astronaut] {
+    func decode<T: Codable>(_ file: String) -> T {
         guard let url = self.url(forResource: file, withExtension: nil) else {
             fatalError("Failed to locate \(file) in bundle.")
         }
@@ -26,7 +38,7 @@ extension Bundle {
         let decoder = JSONDecoder()
 
         do {
-            return try decoder.decode([String: Astronaut].self, from: data)
+            return try decoder.decode(T.self, from: data)
         } catch DecodingError.keyNotFound(let key, let context) {
             fatalError(
                 "Failed to decode \(file) from bundle due to missing key '\(key.stringValue)' – \(context.debugDescription)"
@@ -52,10 +64,14 @@ extension Bundle {
 }
 
 struct ContentView: View {
-    let astronauts = Bundle.main.decode("astronauts.json")
+    let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
+    let missions: [Mission] = Bundle.main.decode("missions.json")
 
     var body: some View {
-        Text(String(astronauts.count))
+        VStack(spacing: 10) {
+            Text("Astronauts: \(astronauts.count)")
+            Text("Missions: \(missions.count)")
+        }
     }
 }
 
