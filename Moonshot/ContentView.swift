@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    let astronauts: [String: Astronaut] =
-        Bundle.main.decode("astronauts.json")
-
-    let missions: [Mission] =
-        Bundle.main.decode("missions.json")
+    let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
+    let missions: [Mission] = Bundle.main.decode("missions.json")
 
     let columns = [
         GridItem(.adaptive(minimum: 150))
@@ -24,13 +21,13 @@ struct ContentView: View {
                 LazyVGrid(columns: columns) {
                     ForEach(missions) { mission in
                         NavigationLink {
-                            Text("Detail view")
+                            MissionView(mission: mission, astronauts: astronauts)
                         } label: {
                             VStack {
                                 Image(mission.image)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 100, height: 100)
+                                    .frame(height: 80)
                                     .padding()
 
                                 VStack {
@@ -42,15 +39,11 @@ struct ContentView: View {
                                         .font(.caption)
                                         .foregroundStyle(.white.opacity(0.5))
                                 }
-                                .padding(.vertical)
-                                .frame(maxWidth: .infinity)
-                                .background(.lightBackground)
+                                .padding(.bottom)
                             }
+                            .frame(maxWidth: .infinity)
+                            .background(.lightBackground)
                             .clipShape(.rect(cornerRadius: 10))
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(.lightBackground)
-                            }
                         }
                     }
                 }
@@ -58,8 +51,8 @@ struct ContentView: View {
             }
             .navigationTitle("Moonshot")
             .background(.darkBackground)
-            .preferredColorScheme(.dark)
         }
+        .preferredColorScheme(.dark)
     }
 }
 
