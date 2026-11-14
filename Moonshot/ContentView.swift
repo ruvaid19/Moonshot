@@ -43,7 +43,7 @@ struct ContentView: View {
                             }
                             .frame(maxWidth: .infinity)
                             .background(.lightBackground)
-                            .clipShape(.rect(cornerRadius: 10))
+                            .clipShape(.rect(cornerRadius: 12))
                         }
                     }
                 }
