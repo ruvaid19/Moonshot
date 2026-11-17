@@ -27,7 +27,7 @@ struct ContentView: View {
                                 Image(mission.image)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(height: 82)
+                                    .frame(height: 80)
                                     .padding()
 
                                 VStack {
@@ -37,7 +37,7 @@ struct ContentView: View {
 
                                     Text(mission.formattedLaunchDate)
                                         .font(.caption)
-                                        .foregroundStyle(.white.opacity(0.6))
+                                        .foregroundStyle(.white.opacity(0.5))
                                 }
                                 .padding(.bottom)
                             }
