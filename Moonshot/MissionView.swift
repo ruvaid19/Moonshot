@@ -71,7 +71,7 @@ struct MissionView: View {
                                 HStack {
                                     Image(crewMember.astronaut.id)
                                         .resizable()
-                                        .frame(width: 102, height: 74)
+                                        .frame(width: 103, height: 74)
                                         .clipShape(.capsule)
                                         .overlay(
                                             Capsule()
@@ -84,7 +84,7 @@ struct MissionView: View {
                                             .font(.headline)
 
                                         Text(crewMember.role)
-                                            .foregroundStyle(.white.opacity(0.6))
+                                            .foregroundStyle(.white.opacity(0.5))
                                     }
                                 }
                                 .padding(.horizontal)
